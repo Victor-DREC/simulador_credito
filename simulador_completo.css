@@ -1,4 +1,11 @@
 
+section {
+    display: none;
+}
+
+.activa {
+    display: block; 
+}
     body {
       font-family: Arial, sans-serif;
       background: #f4f6f9;
