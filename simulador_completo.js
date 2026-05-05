@@ -66,6 +66,7 @@ function pintarClientes() {
             <td>${cli.egresos}</td>
             <td>
                 <button onclick="seleccionarCliente('${cli.cedula}')">Actualizar</button>
+                <button onclick="eliminarCliente('${cli.cedula}')">Eliminar</button>
             </td>
         </tr>`;
     }
@@ -106,4 +107,16 @@ function limpiar() {
     clienteSeleccionado = null;
 }
 
+function eliminarCliente(cedula) {
+    // Buscamos el índice del cliente en el arreglo
+    for (let i = 0; i < clientes.length; i++) {
+        if (clientes[i].cedula === cedula) {
+            // Eliminamos 1 elemento en la posición 'i'
+            clientes.splice(i, 1);
+            break; // Salimos del bucle una vez encontrado y eliminado
+        }
+    }
+    // Refrescamos la tabla para que el cambio sea visible
+    pintarClientes();
+}
 mostrarSeccion("parametros");
