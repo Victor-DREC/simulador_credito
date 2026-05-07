@@ -143,3 +143,33 @@ function buscarClienteCredito() {
         clienteSeleccionado = null;
     }
 }
+
+function calcularCredito(){
+    if(clienteSeleccionado==null){
+        alert("Primero debe buscar y seleccionar un cliente");
+        return;
+    }
+    
+    let monto = recuperarFloat("montoCredito");
+    let plazo = recuperarInt("plazoCredito");
+    let capacidadPago = clienteSeleccionado.ingresos - clienteSeleccionado.egresos;
+    let totalPagar = monto + (monto * tasaInteres / 100);
+    let cuotaMensual = totalPagar / plazo;
+    let aprobado = cuotaMensual <= capacidadPago;
+    let contenedorResultado = document.getElementById("resultadoCredito");
+
+    contenedorResultado.innerHTML = `
+        Capacidad de pago: ${capacidadPago.toFixed(2)}<br>
+        Total a pagar: ${totalPagar.toFixed(2)}<br>
+        Cuota mensual: ${cuotaMensual.toFixed(2)}<br>
+        <strong>RESULTADO: ${aprobado ? "APROBADO" : "RECHAZADO"}</strong>
+    `;
+
+    if(aprobado){
+        contenedorResultado.className = "aprobado";
+        document.getElementById("btnSolicitarCredito").disabled = false;
+    }else{
+        contenedorResultado.className = "rechazado";
+        document.getElementById("btnSolicitarCredito").disabled = true;
+    }
+}

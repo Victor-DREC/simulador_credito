@@ -109,4 +109,19 @@ section {
       border-radius: 5px;
       margin-top: 10px;
     }
-  
+
+    .aprobado {
+    color: green;
+    font-weight: bold;
+    padding: 10px;
+    border: 1px solid green;
+    margin-top: 10px;
+}
+
+.rechazado {
+    color: red;
+    font-weight: bold;
+    padding: 10px;
+    border: 1px solid red;
+    margin-top: 10px;
+}
