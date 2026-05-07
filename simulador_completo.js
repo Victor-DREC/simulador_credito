@@ -206,3 +206,25 @@ function buscarCreditos(cedula) {
     return creditosFiltrados;
 }
 
+function pintarCreditos(listaCreditos) {
+    let contenido = "";
+    for (let i = 0; i < listaCreditos.length; i++) {
+        let cre = listaCreditos[i];
+        contenido += `<tr>
+            <td>${cre.cedula}</td>
+            <td>${cre.nombre}</td>
+            <td>${cre.apellido}</td>
+            <td>${cre.monto}</td>
+            <td>${cre.tasa}%</td>
+            <td>${cre.plazo} meses</td>
+            <td>${cre.cuota.toFixed(2)}</td>
+        </tr>`;
+    }
+    document.getElementById("tablaCreditos").innerHTML = contenido;
+}
+
+function buscarCreditosCliente() {
+    let cedula = recuperaraTexto("buscarCedulaListado");
+    let filtrados = buscarCreditos(cedula);
+    pintarCreditos(filtrados);
+}
