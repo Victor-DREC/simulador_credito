@@ -1,4 +1,5 @@
 let clientes = [];
+let creditos = [];
 let tasaInteres = 15;
 let clienteSeleccionado = null;
 
@@ -144,32 +145,53 @@ function buscarClienteCredito() {
     }
 }
 
-function calcularCredito(){
-    if(clienteSeleccionado==null){
-        alert("Primero debe buscar y seleccionar un cliente");
+function calcularCredito() {
+    if (clienteSeleccionado == null) {
+        alert("Debe buscar un cliente primero");
         return;
     }
-    
-    let monto = recuperarFloat("montoCredito");
-    let plazo = recuperarInt("plazoCredito");
-    let capacidadPago = clienteSeleccionado.ingresos - clienteSeleccionado.egresos;
-    let totalPagar = monto + (monto * tasaInteres / 100);
-    let cuotaMensual = totalPagar / plazo;
-    let aprobado = cuotaMensual <= capacidadPago;
-    let contenedorResultado = document.getElementById("resultadoCredito");
 
-    contenedorResultado.innerHTML = `
-        Capacidad de pago: ${capacidadPago.toFixed(2)}<br>
-        Total a pagar: ${totalPagar.toFixed(2)}<br>
-        Cuota mensual: ${cuotaMensual.toFixed(2)}<br>
-        <strong>RESULTADO: ${aprobado ? "APROBADO" : "RECHAZADO"}</strong>
+    montoCalculado = recuperarFloat("montoCredito"); 
+    plazoCalculado = recuperarInt("plazoCredito");
+
+    let capacidadPago = clienteSeleccionado.ingresos - clienteSeleccionado.egresos;
+    let totalPagar = montoCalculado + (montoCalculado * tasaInteres / 100);
+    
+    cuotaCalculada = totalPagar / plazoCalculado;
+
+    creditoAprobado = cuotaCalculada <= capacidadPago;
+
+    let resultado = document.getElementById("resultadoCredito");
+    resultado.innerHTML = `
+        Capacidad de pago: ${capacidadPago}<br>
+        Total a pagar: ${totalPagar}<br>
+        Cuota mensual: ${cuotaCalculada}<br>
+        RESULTADO: ${creditoAprobado ? "APROBADO" : "RECHAZADO"}
     `;
 
-    if(aprobado){
-        contenedorResultado.className = "aprobado";
-        document.getElementById("btnSolicitarCredito").disabled = false;
-    }else{
-        contenedorResultado.className = "rechazado";
-        document.getElementById("btnSolicitarCredito").disabled = true;
+    let btnAsignar = document.getElementById("btnAsignarCredito");
+    if (creditoAprobado) {
+        resultado.className = "aprobado";
+        btnAsignar.disabled = false; 
+    } else {
+        resultado.className = "rechazado";
+        btnAsignar.disabled = true;
     }
+}
+
+function asignarCredito() {
+    let credito = {
+        cedula: clienteSeleccionado.cedula,
+        nombre: clienteSeleccionado.nombre,
+        apellido: clienteSeleccionado.apellido,
+        monto: montoCalculado,
+        tasa: tasaInteres,
+        plazo: plazoCalculado,
+        cuota: cuotaCalculada
+    };
+
+    creditos.push(credito);
+
+    alert("Crédito registrado con éxito");
+    console.log(creditos);
 }
