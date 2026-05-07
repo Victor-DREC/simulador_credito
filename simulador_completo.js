@@ -6,6 +6,7 @@ let clienteSeleccionado = null;
 function ocultarSecciones() {
     document.getElementById("parametros").classList.remove("activa");
     document.getElementById("clientes").classList.remove("activa");
+    document.getElementById("credito").classList.remove("activa");
 }
 
 function mostrarSeccion(id) {
@@ -119,4 +120,26 @@ function eliminarCliente(cedula) {
     // Refrescamos la tabla para que el cambio sea visible
     pintarClientes();
 }
-mostrarSeccion("parametros");
+
+function buscarClienteCredito() {
+    let cedulaABuscar = recuperaraTexto("buscarCedulaCredito");
+    
+    let clienteEncontrado = buscarCliente(cedulaABuscar);
+
+    if (clienteEncontrado != null) {
+        clienteSeleccionado = clienteEncontrado;
+
+        let contenedorDatos = document.getElementById("datosClienteCredito");
+        contenedorDatos.innerHTML = `
+            <h3>Datos del Cliente</h3>
+            <p><strong>Cédula:</strong> ${clienteEncontrado.cedula}</p>
+            <p><strong>Nombre:</strong> ${clienteEncontrado.nombre}</p>
+            <p><strong>Apellido:</strong> ${clienteEncontrado.apellido}</p>
+            <p><strong>Ingresos:</strong> ${clienteEncontrado.ingresos}</p>
+            <p><strong>Egresos:</strong> ${clienteEncontrado.egresos}</p>
+        `;
+    } else {
+        mostrarTexto("datosClienteCredito", "Cliente no encontrado.");
+        clienteSeleccionado = null;
+    }
+}
