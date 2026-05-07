@@ -195,3 +195,14 @@ function asignarCredito() {
     alert("Crédito registrado con éxito");
     console.log(creditos);
 }
+
+function buscarCreditos(cedula) {
+    let creditosFiltrados = [];
+    for (let i = 0; i < creditos.length; i++) {
+        if (creditos[i].cedula === cedula) {
+            creditosFiltrados.push(creditos[i]);
+        }
+    }
+    return creditosFiltrados;
+}
+
