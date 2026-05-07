@@ -8,6 +8,7 @@ function ocultarSecciones() {
     document.getElementById("parametros").classList.remove("activa");
     document.getElementById("clientes").classList.remove("activa");
     document.getElementById("credito").classList.remove("activa");
+    document.getElementById("historial").classList.remove("activa");
 }
 
 function mostrarSeccion(id) {
@@ -29,6 +30,14 @@ function guardarTasa() {
 
 function guardarCliente() {
     let cedula = recuperaraTexto("txtCedula");
+    
+    // VALIDACIÓN: Controlamos que no sea menor ni mayor a 10
+    if (cedula.length !== 10) {
+        alert("La cédula debe tener exactamente 10 dígitos. Usted ingresó: " + cedula.length);
+        return; // El 'return' evita que el código de abajo se ejecute
+    }
+
+    // Si pasa la validación, continuamos con el resto del proceso
     let nombre = recuperaraTexto("txtNombre");
     let apellido = recuperaraTexto("txtApellido");
     let ingresos = recuperarFloat("txtIngresos");
@@ -125,6 +134,11 @@ function eliminarCliente(cedula) {
 function buscarClienteCredito() {
     let cedulaABuscar = recuperaraTexto("buscarCedulaCredito");
     
+    if (cedulaABuscar.length !== 10) {
+        alert("Por favor, ingrese una cédula válida de 10 dígitos para buscar.");
+        return;
+    }
+
     let clienteEncontrado = buscarCliente(cedulaABuscar);
 
     if (clienteEncontrado != null) {
@@ -227,4 +241,32 @@ function buscarCreditosCliente() {
     let cedula = recuperaraTexto("buscarCedulaListado");
     let filtrados = buscarCreditos(cedula);
     pintarCreditos(filtrados);
+}
+
+function mostrarTodosLosCreditos() {
+    pintarCreditos(creditos); 
+}
+
+function limpiarSeccionCredito() {
+    mostrarTextoEnCaja("buscarCedulaCredito", "");
+    mostrarTextoEnCaja("montoCredito", "");
+    mostrarTextoEnCaja("plazoCredito", "");
+
+    mostrarTexto("datosClienteCredito", "");
+    mostrarTexto("resultadoCredito", "");
+
+    let resultado = document.getElementById("resultadoCredito");
+    resultado.className = ""; 
+
+    clienteSeleccionado = null;
+    document.getElementById("btnAsignarCredito").disabled = true;
+    
+    document.getElementById("buscarCedulaCredito").focus();
+}
+
+function limpiarTablaHistorial() {
+    mostrarTextoEnCaja("buscarCedulaListado", "");
+
+    document.getElementById("tablaCreditos").innerHTML = "";
+    
 }
