@@ -2,6 +2,7 @@ let clientes = [];
 let creditos = [];
 let tasaInteres = 15;
 let clienteSeleccionado = null;
+let montoMaximo = 50000;
 
 
 function ocultarSecciones() {
@@ -9,6 +10,7 @@ function ocultarSecciones() {
     document.getElementById("clientes").classList.remove("activa");
     document.getElementById("credito").classList.remove("activa");
     document.getElementById("historial").classList.remove("activa");
+    document.getElementById("contactos").classList.remove("activa");
 }
 
 function mostrarSeccion(id) {
@@ -42,6 +44,8 @@ function guardarCliente() {
     let apellido = recuperaraTexto("txtApellido");
     let ingresos = recuperarFloat("txtIngresos");
     let egresos = recuperarFloat("txtEgresos");
+    let correo= recuperaraTexto("txtCorreo");
+    let numero= recuperaraTexto("txtNumero");
 
     let clienteExistente = buscarCliente(cedula);
 
@@ -51,7 +55,9 @@ function guardarCliente() {
             nombre: nombre,
             apellido: apellido,
             ingresos: ingresos,
-            egresos: egresos
+            egresos: egresos,
+            correo: correo,
+            numero: numero
         };
         clientes.push(nuevoCliente);
     } else {
@@ -59,6 +65,8 @@ function guardarCliente() {
         clienteExistente.apellido = apellido;
         clienteExistente.ingresos = ingresos;
         clienteExistente.egresos = egresos;
+        clienteExistente.correo = correo;
+        clienteExistente.numero = numero;
     }
 
     pintarClientes();
@@ -73,8 +81,10 @@ function pintarClientes() {
             <td>${cli.cedula}</td>
             <td>${cli.nombre}</td>
             <td>${cli.apellido}</td>
+            <td>${cli.correo}</td>
             <td>${cli.ingresos}</td>
             <td>${cli.egresos}</td>
+            <td>${cli.numero}</td>
             <td>
                 <button onclick="seleccionarCliente('${cli.cedula}')">Actualizar</button>
                 <button onclick="eliminarCliente('${cli.cedula}')">Eliminar</button>
@@ -102,6 +112,8 @@ function seleccionarCliente(cedula) {
         mostrarTextoEnCaja("txtApellido", cliente.apellido);
         mostrarTextoEnCaja("txtIngresos", cliente.ingresos);
         mostrarTextoEnCaja("txtEgresos", cliente.egresos);
+        mostrarTextoEnCaja("txtCorreo", cliente.correo);
+        mostrarTextoEnCaja("txtNumero", cliente.numero);
         
         document.getElementById("txtCedula").disabled = true;
     }
@@ -113,6 +125,8 @@ function limpiar() {
     mostrarTextoEnCaja("txtApellido", "");
     mostrarTextoEnCaja("txtIngresos", "");
     mostrarTextoEnCaja("txtEgresos", "");
+    mostrarTextoEnCaja("txtCorreo", "");
+    mostrarTextoEnCaja("txtNumero", "");
     
     document.getElementById("txtCedula").disabled = false;
     clienteSeleccionado = null;
@@ -167,6 +181,13 @@ function calcularCredito() {
 
     montoCalculado = recuperarFloat("montoCredito"); 
     plazoCalculado = recuperarInt("plazoCredito");
+
+    // NUEVA VALIDACIÓN: Control de Monto Máximo
+    if (montoCalculado > montoMaximo) {
+        alert("Error: El monto solicitado ($" + montoCalculado + ") supera el monto máximo permitido por el sistema ($" + montoMaximo + ").");
+        mostrarTextoEnCaja("montoCredito", ""); // Limpia la caja de texto del monto solicitado
+        return; // Detiene la ejecución para que no calcule ni apruebe el crédito
+    }
 
     let capacidadPago = clienteSeleccionado.ingresos - clienteSeleccionado.egresos;
     let totalPagar = montoCalculado + (montoCalculado * tasaInteres / 100);
@@ -269,4 +290,53 @@ function limpiarTablaHistorial() {
 
     document.getElementById("tablaCreditos").innerHTML = "";
     
+}
+
+function guardarParametros() {
+    let tasa = recuperarFloat("tasaInteres"); 
+    let maximo = recuperarFloat("montoMaximoInput"); // Captura el nuevo input
+
+    let mensaje = "";
+
+    // Validar tasa
+    if (tasa >= 10 && tasa <= 20) {
+        tasaInteres = tasa;
+        mensaje += "Tasa configurada en: " + tasaInteres + "%. ";
+    } else {
+        mensaje += "Error: La tasa debe estar entre 10% y 20%. ";
+    }
+
+    // Validar y guardar Monto Máximo
+    if (!isNaN(maximo) && maximo > 0) {
+        montoMaximo = maximo;
+        mensaje += "Monto máximo permitido: $" + montoMaximo;
+    } else {
+        mensaje += "Error: Ingrese un monto máximo válido.";
+    }
+
+    mostrarTexto("mensajeTasa", mensaje);
+}
+
+// Función para filtrar los créditos mayores a 5000
+function filtrarCreditosVIP() {
+    let vipFiltrados = [];
+    for (let i = 0; i < creditos.length; i++) {
+        // REQUERIMIENTO: Únicamente los créditos mayores a 5000
+        if (creditos[i].monto > 5000) {
+            vipFiltrados.push(creditos[i]);
+        }
+    }
+    return vipFiltrados;
+}
+
+// Función que se ejecuta al presionar el botón "Créditos VIP"
+function mostrarCreditosVIP() {
+    let listaVIP = filtrarCreditosVIP();
+    
+    if (listaVIP.length === 0) {
+        alert("No se encontraron créditos VIP registrados (mayores a $5000).");
+    }
+    
+    // Reutiliza tu función pintarCreditos para visualizar la información en la tabla
+    pintarCreditos(listaVIP); 
 }

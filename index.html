@@ -17,7 +17,33 @@
   <button onclick="mostrarSeccion('clientes')">Clientes</button>
   <button onclick="mostrarSeccion('credito')">Créditos</button>
   <button onclick="mostrarSeccion('historial')">Créditos Registrados</button>
+  <button onclick="mostrarSeccion('contactos')">Contactos</button>
 </nav>
+
+<section id="contactos">
+  <h2>Acerca del Desarrollador</h2>
+  
+  <div class="card-desarrollador">
+    <div style="text-align: center; margin-bottom: 15px;">
+      <img id="imgDesarrollador" src="logo.png" >
+    </div>
+
+    <p><strong>Nombre:</strong> VICTOR PILACHANGA</p>
+    <p><strong>Carrera:</strong> Desarrollo de Software</p>
+    
+    <h3>Redes Sociales:</h3>
+    <ul>
+      <li><strong>LinkedIn:</strong> linkedin.com/in/victorpilachanga</li>
+      <li><strong>GitHub:</strong> github.com/victorpilachanga</li>
+      <li><strong>Correo:</strong> victor.pilachanga@correo.com</li>
+    </ul>
+
+    <br>
+    <blockquote>
+      <p><em>"El código limpio siempre parece que fue escrito por alguien a quien le importa."</em></p>
+    </blockquote>
+  </div>
+</section>
 
 <section id="parametros">
   <h2>Configurar Parámetros</h2>
@@ -26,8 +52,14 @@
   <input type="number" id="tasaInteres" min="10" max="20" value="15">
   <span>%</span>
 
-  <br>
-  <button onclick="guardarTasa()">Guardar tasa</button>
+  <br><br>
+
+  <label>Monto Máximo de Crédito:</label>
+  <input type="number" id="montoMaximoInput" value="50000">
+  <span>USD</span>
+
+  <br><br>
+  <button onclick="guardarParametros()">Guardar parámetros</button>
 
   <p id="mensajeTasa"></p>
 </section>
@@ -40,6 +72,8 @@
   <input type="text" id="txtApellido" placeholder="Apellido">
   <input type="number" id="txtIngresos" placeholder="Ingresos">
   <input type="number" id="txtEgresos" placeholder="Egresos">
+  <input type="text" id="txtCorreo" placeholder="Correo">
+  <input type="text" id="txtNumero" placeholder="Número">
 
   <br>
 
@@ -52,8 +86,10 @@
         <th>Cédula</th>
         <th>Nombre</th>
         <th>Apellido</th>
+        <th>Correo</th>
         <th>Ingresos</th>
         <th>Egresos</th>
+        <th>Número</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -92,6 +128,9 @@
   <input type="text" id="buscarCedulaListado">
   <button onclick="buscarCreditosCliente()">Buscar</button> 
   <button onclick="pintarCreditos(creditos)">Ver Todos</button>
+  
+  <button onclick="mostrarCreditosVIP()">Créditos VIP</button>
+  
   <button onclick="limpiarTablaHistorial()">Limpiar</button>
 
   <table>
