@@ -1,49 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
 
+
 <head>
   <meta charset="UTF-8">
   <title>Sistema de Créditos</title>
   <link rel="stylesheet" href="simulador_completo.css">
 </head>
 
+
 <body>
 
   <header>
     <h1>Sistema Básico de Créditos</h1>
   </header>
-
-<nav>
-  <!-- Literal c: Conexión de botones de navegación -->
-  <button onclick="mostrarSeccion('parametros')">Parámetros</button>
-  <button onclick="mostrarSeccion('clientes')">Clientes</button>
-  <button onclick="mostrarSeccion('credito')">Créditos</button>
-  <button onclick="mostrarSeccion('historial')">Créditos Registrados</button>
-  <button onclick="mostrarSeccion('contactos')">Info. Desarrollador</button>
-</nav>
-
-<section id="contactos">
-  <h2>Acerca del Creador de la Pagina:</h2>
-  
-  <div class="card-desarrollador">
-    <div style="text-align: center; margin-bottom: 15px;">
-      <img id="imgDesarrollador" src="logo.png" >
-    </div>
-  </section>
-
-    <p><strong>Nombre:</strong> VICTOR PILACHANGA</p>
-    <p><strong>Carrera:</strong> Desarrollo de Software</p>
-    <p><strong>Semestre:</strong> 1er Semestre</p>
-    <p><strong>Materia:</strong> Logistica y Resolución de problemas Computacionales</p>
-    
-    <h3>Redes Sociales:</h3>
-    <ul>
-      <li><strong>LinkedIn:</strong> linkedin.com/in/victorpilachanga</li>
-      <li><strong>GitHub:</strong> github.com/victorpilachanga</li>
-      <li><strong>Perfil GitHub:</strong> Victor-Drec</li>
-      <li><strong>Correo:</strong> victor.pilachanga@correo.com</li>
-      <li><strong>Número:</strong> 0998540450</li>
-    </ul>
+  <header>
+    <h1>Sistema Básico de Créditos</h1>
+  </header>
   <nav>
     <!-- Literal c: Conexión de botones de navegación -->
     <button onclick="mostrarSeccion('parametros')">Parámetros</button>
@@ -78,7 +51,15 @@
       </blockquote>
     </div>
   </section>
+      <br>
+      <blockquote>
+        <p><em>"El código limpio siempre parece que fue escrito por alguien a quien le importa."</em></p>
+      </blockquote>
+    </div>
+  </section>
 
+  <section id="parametros">
+    <h2>Configurar Parámetros</h2>
   <section id="parametros">
     <h2>Configurar Parámetros</h2>
 
@@ -180,25 +161,43 @@
       </tbody>
     </table>
   </section>
+      </tbody>
+    </table>
+  </section>
 
+  <section id="credito">
+    <h2>Solicitar Crédito</h2>
   <section id="credito">
     <h2>Solicitar Crédito</h2>
 
     <input type="number" id="buscarCedulaCredito" placeholder="Cédula">
     <button onclick="buscarClienteCredito()">Buscar cliente</button>
     <button onclick="limpiarSeccionCredito()">Limpiar</button>
+    <input type="number" id="buscarCedulaCredito" placeholder="Cédula">
+    <button onclick="buscarClienteCredito()">Buscar cliente</button>
+    <button onclick="limpiarSeccionCredito()">Limpiar</button>
 
+    <div id="datosClienteCredito" class="card"></div>
     <div id="datosClienteCredito" class="card"></div>
 
     <input type="number" id="montoCredito" placeholder="Monto">
     <input type="number" id="plazoCredito" placeholder="Plazo (meses)">
+    <input type="number" id="montoCredito" placeholder="Monto">
+    <input type="number" id="plazoCredito" placeholder="Plazo (meses)">
 
+    <br>
     <br>
 
     <button onclick="calcularCredito()">Calcular crédito</button>
+    <button onclick="calcularCredito()">Calcular crédito</button>
 
     <div id="resultadoCredito"></div>
+    <div id="resultadoCredito"></div>
 
+    <button id="btnAsignarCredito" onclick="asignarCredito()" disabled>
+      Asignar Crédito
+    </button>
+  </section>
     <button id="btnAsignarCredito" onclick="asignarCredito()" disabled>
       Asignar Crédito
     </button>
@@ -206,7 +205,16 @@
 
   <section id="historial">
     <h2>Créditos Registrados</h2>
+  <section id="historial">
+    <h2>Créditos Registrados</h2>
 
+    <input type="text" id="buscarCedulaListado">
+    <button onclick="buscarCreditosCliente()">Buscar</button>
+    <button onclick="pintarCreditos(creditos)">Ver Todos</button>
+
+    <button onclick="mostrarCreditosVIP()">Créditos VIP</button>
+
+    <button onclick="limpiarTablaHistorial()">Limpiar</button>
     <input type="text" id="buscarCedulaListado">
     <button onclick="buscarCreditosCliente()">Buscar</button>
     <button onclick="pintarCreditos(creditos)">Ver Todos</button>
@@ -249,9 +257,46 @@
 
       </div>
   </section>
+    <table>
+      <thead>
+        <tr>
+          <th>Cédula</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Monto</th>
+          <th>Tasa</th>
+          <th>Plazo</th>
+          <th>Cuota</th>
+        </tr>
+      </thead>
+      <tbody id="tablaCreditos">
+      </tbody>
+    </table>
+  </section>
+
+  <section id="Calculos">
+    <div>
+      <h2>Acerca del Desarrollador</h2>
+      <h3>Tutotias clear minds</h3>
+    </div>
+
+      <div>
+        <h1>Indice de masa</h1>
+        <input type="number" id="peso" placeholder="Peso (kg)">
+        <input type="number" id="altura" placeholder="Altura (m)">
+
+        <button onclick="calcularIMC(peso, altura)">Calcular IMC</button>
+
+        <p id="resultadoIMC"></p>
+
+      </div>
+  </section>
 
   <script src="utilitarios.js"></script>
   <script src="simulador_completo.js"></script>
+  <script src="utilitarios.js"></script>
+  <script src="simulador_completo.js"></script>
 </body>
+
 
 </html>
