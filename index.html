@@ -13,6 +13,7 @@
     <h1>Sistema Básico de Créditos</h1>
   </header>
 
+<<<<<<< HEAD
 <nav>
   <!-- Literal c: Conexión de botones de navegación -->
   <button onclick="mostrarSeccion('parametros')">Parámetros</button>
@@ -44,12 +45,79 @@
       <li><strong>Correo:</strong> victor.pilachanga@correo.com</li>
       <li><strong>Número:</strong> 0998540450</li>
     </ul>
+=======
+  <nav>
+    <!-- Literal c: Conexión de botones de navegación -->
+    <button onclick="mostrarSeccion('parametros')">Parámetros</button>
+    <button onclick="mostrarSeccion('clientes')">Clientes</button>
+    <button onclick="mostrarSeccion('credito')">Créditos</button>
+    <button onclick="mostrarSeccion('historial')">Créditos Registrados</button>
+    <button onclick="mostrarSeccion('contactos')">Contactos</button>
+    <button onclick="mostrarSeccion('Calculos')">Calculos</button>
+  </nav>
+
+  <section id="contactos">
+    <h2>Acerca del Desarrollador</h2>
+
+    <div class="card-desarrollador">
+      <div style="text-align: center; margin-bottom: 15px;">
+        <img id="imgDesarrollador" src="logo.png">
+      </div>
+
+      <p><strong>Nombre:</strong> VICTOR PILACHANGA</p>
+      <p><strong>Carrera:</strong> Desarrollo de Software</p>
+
+      <h3>Redes Sociales:</h3>
+      <ul>
+        <li><strong>LinkedIn:</strong> linkedin.com/in/victorpilachanga</li>
+        <li><strong>GitHub:</strong> github.com/victorpilachanga</li>
+        <li><strong>Correo:</strong> victor.pilachanga@correo.com</li>
+      </ul>
+
+      <br>
+      <blockquote>
+        <p><em>"El código limpio siempre parece que fue escrito por alguien a quien le importa."</em></p>
+      </blockquote>
+    </div>
+  </section>
+
+  <section id="parametros">
+    <h2>Configurar Parámetros</h2>
+
+    <label>Tasa de interés:</label>
+    <input type="number" id="tasaInteres" min="10" max="20" value="15">
+    <span>%</span>
+
+    <br><br>
+
+    <label>Monto Máximo de Crédito:</label>
+    <input type="number" id="montoMaximoInput" value="50000">
+    <span>USD</span>
+
+    <br><br>
+    <button onclick="guardarParametros()">Guardar parámetros</button>
+
+    <p id="mensajeTasa"></p>
+  </section>
+
+  <section id="clientes">
+    <h2>Registro de Clientes</h2>
+
+    <input type="number" id="txtCedula" placeholder="Cédula (10 dígitos)">
+    <input type="text" id="txtNombre" placeholder="Nombre">
+    <input type="text" id="txtApellido" placeholder="Apellido">
+    <input type="number" id="txtIngresos" placeholder="Ingresos">
+    <input type="number" id="txtEgresos" placeholder="Egresos">
+    <input type="text" id="txtCorreo" placeholder="Correo">
+    <input type="text" id="txtNumero" placeholder="Número">
+>>>>>>> 2f55ffa (Modulo de calculos)
 
     <br>
 
     <button onclick="guardarCliente()">Guardar cliente</button>
     <button onclick="limpiar()">Limpiar</button>
 
+<<<<<<< HEAD
   <label>Tasa de interés:</label>
   <p>Se establecera la tasa de interes que se utilizara para los prestamos a relaizarse.</p>
   <input type="number" id="tasaInteres" min="10" max="20" value="15">
@@ -98,6 +166,22 @@
       </tr>
     </thead>
     <tbody id="tablaClientes">
+=======
+    <table>
+      <thead>
+        <tr>
+          <th>Cédula</th>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Correo</th>
+          <th>Ingresos</th>
+          <th>Egresos</th>
+          <th>Número</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="tablaClientes">
+>>>>>>> 2f55ffa (Modulo de calculos)
         <!-- Contenido dinámico generado por JS[cite: 4] -->
       </tbody>
     </table>
