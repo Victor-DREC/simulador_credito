@@ -145,6 +145,13 @@ function eliminarCliente(cedula) {
     pintarClientes();
 }
 
+function calcularIMC(peso, altura) {
+    peso = recuperarFloat("peso");
+    altura = recuperarFloat("altura");
+    let imc = peso / (altura * altura);
+    document.getElementById("resultadoIMC").innerHTML = `Su IMC es: ${imc.toFixed(2)}`;
+}
+
 function buscarClienteCredito() {
     let cedulaABuscar = recuperaraTexto("buscarCedulaCredito");
     
