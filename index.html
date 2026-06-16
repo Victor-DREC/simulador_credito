@@ -17,11 +17,11 @@
   <button onclick="mostrarSeccion('clientes')">Clientes</button>
   <button onclick="mostrarSeccion('credito')">Créditos</button>
   <button onclick="mostrarSeccion('historial')">Créditos Registrados</button>
-  <button onclick="mostrarSeccion('contactos')">Contactos</button>
+  <button onclick="mostrarSeccion('contactos')">Info. Desarrollador</button>
 </nav>
 
 <section id="contactos">
-  <h2>Acerca del Desarrollador</h2>
+  <h2>Acerca del Creador de la Pagina:</h2>
   
   <div class="card-desarrollador">
     <div style="text-align: center; margin-bottom: 15px;">
@@ -30,12 +30,16 @@
 
     <p><strong>Nombre:</strong> VICTOR PILACHANGA</p>
     <p><strong>Carrera:</strong> Desarrollo de Software</p>
+    <p><strong>Semestre:</strong> 1er Semestre</p>
+    <p><strong>Materia:</strong> Logistica y Resolución de problemas Computacionales</p>
     
     <h3>Redes Sociales:</h3>
     <ul>
       <li><strong>LinkedIn:</strong> linkedin.com/in/victorpilachanga</li>
       <li><strong>GitHub:</strong> github.com/victorpilachanga</li>
+      <li><strong>Perfil GitHub:</strong> Victor-Drec</li>
       <li><strong>Correo:</strong> victor.pilachanga@correo.com</li>
+      <li><strong>Número:</strong> 0998540450</li>
     </ul>
 
     <br>
@@ -49,12 +53,14 @@
   <h2>Configurar Parámetros</h2>
 
   <label>Tasa de interés:</label>
+  <p>Se establecera la tasa de interes que se utilizara para los prestamos a relaizarse.</p>
   <input type="number" id="tasaInteres" min="10" max="20" value="15">
   <span>%</span>
 
   <br><br>
 
   <label>Monto Máximo de Crédito:</label>
+  <p>Es el monto maximo que puede solicitar una persona en sus créditos.</p>
   <input type="number" id="montoMaximoInput" value="50000">
   <span>USD</span>
 
@@ -66,7 +72,7 @@
 
 <section id="clientes">
   <h2>Registro de Clientes</h2>
-
+  <p>Se guardara en una base de datos toda la información de cada cliente.</p>
   <input type="number" id="txtCedula" placeholder="Cédula (10 dígitos)">
   <input type="text" id="txtNombre" placeholder="Nombre">
   <input type="text" id="txtApellido" placeholder="Apellido">
